@@ -13,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Toast.makeText(this,"Pirates was here!",Toast.LENGTH_LONG).show();
+        String  alertText = "This is my variable text";
+        Toast.makeText(this,alertText,Toast.LENGTH_LONG).show();
 
 
     }
