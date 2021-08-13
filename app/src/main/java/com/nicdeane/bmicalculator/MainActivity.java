@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     private RadioButton male;
@@ -45,13 +47,53 @@ public class MainActivity extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculateBMI();
+                double bmi = calculateBMI();
+                String ageText = age.getText().toString();
+                int age = Integer.parseInt(ageText);
+                if (age >= 18) {
+                    displayResult(bmi);
+                } else {
+                    displayGuidance(bmi);
+                }
+
             }
         });
     }
 
-    private void calculateBMI() {
+    private double calculateBMI() {
+        // getting values from UI
+        String feetText = feet.getText().toString();
+        String inchesText = inches.getText().toString();
+        String weightText = weight.getText().toString();
 
+        // converting values to ints
+        int feet = Integer.parseInt(feetText);
+        int inches = Integer.parseInt(inchesText);
+        int weight = Integer.parseInt(weightText);
+
+        // perform calculations
+        int height = (feet * 12) + inches;
+        double heightInMeters = height * 0.0254;
+
+        return weight / (heightInMeters * heightInMeters);
+    }
+
+    private void displayResult(double bmi) {
+        DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+        String bmiText = decimalFormatter.format(bmi);
+        String fullResult;
+        if (bmi < 18.5) {
+            fullResult = "Your BMI is: " + bmiText + " You are underweight!";
+        } else if (bmi > 25) {
+            fullResult = "Your BMI is: " + bmiText + " You are way too fat!";
+        } else {
+            fullResult = "Your BMI is: " + bmiText + " You are a healthy weight.";
+        }
+        resultText.setText(fullResult);
+    }
+
+    private void displayGuidance(double bmi) {
+        resultText.setText("Get Fucked Mate.");
     }
 
 
