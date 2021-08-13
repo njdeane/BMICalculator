@@ -3,6 +3,7 @@ package com.nicdeane.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -24,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
         EditText weight = findViewById(R.id.edit_text_weight);
         Button calculate = findViewById(R.id.button_calculate);
         TextView resultText = findViewById(R.id.text_view_result);
+
+        calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Pirates are here again", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
